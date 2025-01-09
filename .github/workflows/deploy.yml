@@ -31,13 +31,15 @@ jobs:
 
       - name: Prepare preview directory
         run: |
-          # Get branch name or PR number
+          # Replace slashes with dashes in branch name
           if [ "${{ github.event_name }}" == "pull_request" ]; then
-            DEPLOY_PATH="pr-${{ github.event.number }}"
+            BRANCH_NAME="${{ github.head_ref }}"
           else
-            # Replace slashes with dashes in branch name
-            DEPLOY_PATH="${GITHUB_REF_NAME//\//-}"
+            BRANCH_NAME="${GITHUB_REF_NAME}"
           fi
+          
+          # Replace slashes with dashes for safety
+          DEPLOY_PATH="${BRANCH_NAME//\//-}"
           
           # Create preview directory structure
           mkdir -p "preview-out/${DEPLOY_PATH}"
@@ -50,23 +52,3 @@ jobs:
           publish_dir: preview-out
           keep_files: true
           publish_branch: gh-pages
-
-      - name: Comment PR
-        if: github.event_name == 'pull_request'
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const prNumber = context.payload.pull_request.number;
-            const repoName = context.repo.repo;
-            const owner = context.repo.owner;
-            
-            const previewUrl = `https://${owner}.github.io/${repoName}/pr-${prNumber}/`;
-            
-            const comment = `🚀 Preview deployment is ready!\n\nBuilt with commit ${context.sha}\n\n[Preview Link](${previewUrl})`;
-            
-            github.rest.issues.createComment({
-              owner: owner,
-              repo: repoName,
-              issue_number: prNumber,
-              body: comment
-            });
