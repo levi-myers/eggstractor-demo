@@ -30,6 +30,7 @@ jobs:
         run: npm run build
 
       - name: Prepare preview directory
+        id: preview
         run: |
           # Replace slashes with dashes in branch name
           if [ "${{ github.event_name }}" == "pull_request" ]; then
@@ -40,6 +41,7 @@ jobs:
           
           # Replace slashes with dashes for safety
           DEPLOY_PATH="${BRANCH_NAME//\//-}"
+          echo "deploy_path=${DEPLOY_PATH}" >> $GITHUB_OUTPUT
           
           # Create preview directory structure
           mkdir -p "preview-out/${DEPLOY_PATH}"
@@ -55,3 +57,23 @@ jobs:
           publish_dir: preview-out
           keep_files: true
           publish_branch: gh-pages
+
+      - name: Find Comment
+        uses: peter-evans/find-comment@v3
+        if: github.event_name == 'pull_request'
+        id: fc
+        with:
+          issue-number: ${{ github.event.pull_request.number }}
+          comment-author: 'github-actions[bot]'
+          body-includes: '🎉 **Preview Deployed!**'
+
+      - name: Comment on PR
+        if: github.event_name == 'pull_request'
+        uses: peter-evans/create-or-update-comment@v3
+        with:
+          comment-id: ${{ steps.fc.outputs.comment-id }}
+          issue-number: ${{ github.event.pull_request.number }}
+          body: |
+            🎉 **Preview Deployed!**  
+            👉 [View Preview](https://<YOUR_USERNAME>.github.io/<YOUR_REPO>/${{ steps.preview.outputs.deploy_path }})
+          edit-mode: replace
