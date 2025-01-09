@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "clean": "rimraf dist",
-    "build": "npm run clean && sass src/sass/custom.sass:dist/prod.css --style compressed && cp src/index.html dist/",
+    "build": "npm run clean && sass src/sass/custom.sass:dist/prod.css --style compressed && cp src/index.html dist/ && cp src/404.html dist/",
     "serve": "http-server dist -o -c-1",
     "start": "npm run build && npm run serve"
   },

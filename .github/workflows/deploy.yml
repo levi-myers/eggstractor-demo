@@ -44,6 +44,9 @@ jobs:
           # Create preview directory structure
           mkdir -p "preview-out/${DEPLOY_PATH}"
           cp -r dist/* "preview-out/${DEPLOY_PATH}/"
+          
+          # Copy 404.html to root for routing
+          cp dist/404.html preview-out/
 
       - name: Deploy to gh-pages
         uses: peaceiris/actions-gh-pages@v3
