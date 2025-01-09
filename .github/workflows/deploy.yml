@@ -14,6 +14,9 @@ permissions:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    environment:
+      name: 'preview-${{ github.ref_name }}'
+      url: 'https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/${{ steps.preview.outputs.deploy_path }}'
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -58,24 +61,12 @@ jobs:
           keep_files: true
           publish_branch: gh-pages
 
-      - name: Find Comment
-        uses: peter-evans/find-comment@v3
-        if: github.event_name == 'pull_request'
-        id: fc
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          issue-number: ${{ github.event.pull_request.number }}
-          comment-author: 'github-actions[bot]'
-          body-includes: '🎉 **Preview Deployed!**'
-
       - name: Comment on PR
         if: github.event_name == 'pull_request'
-        uses: peter-evans/create-or-update-comment@v3
+        uses: actions-ecosystem/action-create-comment@v1
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          comment-id: ${{ steps.fc.outputs.comment-id }}
-          issue-number: ${{ github.event.pull_request.number }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          issue_number: ${{ github.event.pull_request.number }}
           body: |
             🎉 **Preview Deployed!**  
             👉 [View Preview](https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/${{ steps.preview.outputs.deploy_path }})
-          edit-mode: replace
