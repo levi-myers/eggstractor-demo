@@ -73,5 +73,5 @@ jobs:
               repo: context.repo.repo,
               issue_number: context.issue.number,
               body: `🎉 **Preview Deployed!**  
-              👉 [View Preview](https://${context.repo.owner}.github.io/${context.repo.repo}/${{ steps.preview.outputs.deploy_path }})`
+              👉 <a href="https://${context.repo.owner}.github.io/${context.repo.repo}/${{ steps.preview.outputs.deploy_path }}" target="_blank">View Preview</a>`
             })
