@@ -1,14 +1,15 @@
-// Generated SCSS variables
+// Generated SCSS Variables
 $global-colour-action-textonbg: #ffffff
 $base-font-weight-semibold: 500px
-$global-colour-textonlight: #282828
+$base-colour-pink-300: #cd0087
 $base-font-size-xl: 20px
 $base-font-linespacing-lg: 24px
 $base-colour-static-white: #ffffff
 $base-colour-grey-100: #d9d9d9
+$global-colour-textonlight: #282828
 $base-font-weight-regular: 400px
 $base-colour-grey-300: #747474
-$global-colour-action-background: #cd0087
+$brand-colour-accent-300: #0177cc
 
 // Generated SCSS Mixins
 @mixin button_resting_button-text
@@ -26,7 +27,7 @@ $global-colour-action-background: #cd0087
   border-width: 1px
 
 @mixin input_resting_label
-  color: $global-colour-textonlight
+  color: $base-colour-pink-300
   font-size: $base-font-size-xl
   font-weight: $base-font-weight-semibold
   line-height: $base-font-linespacing-lg
@@ -41,7 +42,7 @@ $global-colour-action-background: #cd0087
   font-weight: $base-font-weight-regular
 
 @mixin input_hover_label
-  color: $global-colour-textonlight
+  color: $base-colour-pink-300
   font-size: $base-font-size-xl
   font-weight: $base-font-weight-semibold
   line-height: $base-font-linespacing-lg
@@ -56,16 +57,17 @@ $global-colour-action-background: #cd0087
   font-weight: $base-font-weight-regular
 
 @mixin input_active_label
-  color: $global-colour-textonlight
+  color: $base-colour-pink-300
   font-size: $base-font-size-xl
   font-weight: $base-font-weight-semibold
   line-height: $base-font-linespacing-lg
 
 @mixin input_active_input-box
   background-color: $base-colour-static-white
-  border-color: $global-colour-action-background
+  border-color: $brand-colour-accent-300
   border-width: 2px
 
 @mixin input_active_input-box_input-text
   color: $global-colour-textonlight
   font-weight: $base-font-weight-regular
+
