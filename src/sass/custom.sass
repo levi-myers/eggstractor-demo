@@ -1,0 +1,33 @@
+@use 'source'
+
+.container
+  width: 100%
+  max-width: 400px
+  margin: 0 auto
+
+.custom-input
+  position: relative
+  margin-bottom: 20px
+
+  label
+    display: block
+    @include source.input_resting_label
+    margin-bottom: 8px
+  
+  input
+    width: 100%
+    padding: 12px
+    @include source.input_resting_input-box
+    @include source.input_resting_input-box_input-text
+    
+    &:hover
+      @include source.input_hover_input-box
+      @include source.input_hover_input-box_input-text
+      + label
+        @include source.input_hover_label
+    
+    &:focus
+      @include source.input_active_input-box
+      @include source.input_active_input-box_input-text
+      + label
+        @include source.input_active_label

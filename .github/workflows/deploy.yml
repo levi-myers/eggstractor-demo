@@ -1,0 +1,48 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: ['*']
+  pull_request:
+    branches: ['*']
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out the code
+        uses: actions/checkout@v3
+
+      - name: Use Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build project
+        run: npm run build
+
+      - name: Prepare subfolder for deployment
+        run: |
+          # GITHUB_REF_NAME is something like "main" or "feature/my-feature"
+          # We'll replace slashes with dashes for safety
+          BRANCH_NAME="${GITHUB_REF_NAME//\//-}"
+
+          # Clean any old preview-out folder
+          rm -rf preview-out
+
+          # Create subfolder for this branch
+          mkdir -p "preview-out/${BRANCH_NAME}"
+
+          # Copy the build (dist) into that subfolder
+          cp -r dist/* "preview-out/${BRANCH_NAME}/"
+
+      - name: Deploy to gh-pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: preview-out
+          publish_branch: gh-pages
