@@ -10,6 +10,8 @@ permissions:
   contents: write
   pages: write
   id-token: write
+  issues: write
+  pull-requests: write
 
 jobs:
   build-and-deploy:
@@ -71,5 +73,5 @@ jobs:
               repo: context.repo.repo,
               issue_number: context.issue.number,
               body: `🎉 **Preview Deployed!**  
-              👉 [View Preview](https://${context.repo.owner}.github.io/${context.repo.repo}/${process.env.DEPLOY_PATH})`
+              👉 [View Preview](https://${context.repo.owner}.github.io/${context.repo.repo}/${{ steps.preview.outputs.deploy_path }})`
             })
