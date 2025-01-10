@@ -39,3 +39,14 @@
     &.active:hover
       @include source.input_active_input-box
       @include source.input_active_input-box_input-text
+
+  &:has(.input-field:focus, .input-field:focus-within, .input-field.active)
+    border: 1px solid #000
+
+    label 
+      @include source.input_active_label
+
+  &:has(.input-field:hover) 
+    label 
+      @include source.input_hover_label
+
