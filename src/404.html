@@ -6,16 +6,18 @@
     <script>
         // Get the path from the URL
         const path = window.location.pathname.split('/').filter(Boolean);
-        const repo = path[0];  // First part is repo name
+        const repo = path[0];
         
-        if (path.length === 1) {
+        // Check if we're already in an infinite loop
+        if (path.filter(p => p === 'index.html').length > 1) {
+            document.body.innerHTML = '<p>Error: Path not found</p>';
+        } else if (path.length === 1) {
             // At repo root, redirect to main
             window.location.href = `/${repo}/main/`;
         } else {
-            // We're looking for a branch preview
-            // Reconstruct the path to the index.html in that branch's directory
-            const remainingPath = path.slice(1).join('/');
-            window.location.href = `/${repo}/${remainingPath}/index.html`;
+            // Try the branch preview once
+            const branchPath = path[1];
+            window.location.href = `/${repo}/${branchPath}/index.html`;
         }
     </script>
 </head>
