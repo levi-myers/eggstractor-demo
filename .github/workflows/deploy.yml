@@ -13,6 +13,10 @@ permissions:
   issues: write
   pull-requests: write
 
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -63,6 +67,7 @@ jobs:
           publish_dir: preview-out
           keep_files: true
           publish_branch: gh-pages
+          force_orphan: true
 
       - name: Wait for Pages
         id: wait-for-pages
