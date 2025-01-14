@@ -6,6 +6,11 @@ on:
   pull_request:
     branches: ['*']
 
+# Add concurrency settings
+concurrency: 
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 permissions:
   contents: write
   pages: write
@@ -64,20 +69,49 @@ jobs:
           keep_files: true
           publish_branch: gh-pages
 
-      - name: Wait for deployment
-        if: github.event_name == 'pull_request'
-        run: |
-          echo "Waiting for deployment to be ready..."
-          sleep 30
+      - name: Wait for Pages
+        id: wait-for-pages
+        if: github.event_name == 'pull_request' && steps.deploy.conclusion == 'success'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const MAX_ATTEMPTS = 30;
+            for (let i = 0; i < MAX_ATTEMPTS; i++) {
+              const deployments = await github.rest.repos.listDeployments({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                environment: 'github-pages'
+              });
+              
+              if (deployments.data.length > 0) {
+                const status = await github.rest.repos.listDeploymentStatuses({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  deployment_id: deployments.data[0].id
+                });
+                
+                if (status.data[0]?.state === 'success') {
+                  console.log('Deployment complete!');
+                  break;
+                }
+              }
+              
+              if (i === MAX_ATTEMPTS - 1) {
+                throw new Error('Deployment timeout');
+              }
+              
+              console.log(`Waiting for deployment... (Attempt ${i + 1}/${MAX_ATTEMPTS})`);
+              await new Promise(r => setTimeout(r, 10000));
+            }
 
       - name: Comment on PR
         if: |
           github.event_name == 'pull_request' && 
-          steps.deploy.conclusion == 'success'
+          steps.deploy.conclusion == 'success' && 
+          steps.wait-for-pages.conclusion == 'success'
         uses: actions/github-script@v7
         with:
           script: |
-            await new Promise(r => setTimeout(r, 10000)); // Wait additional 10s
             github.rest.issues.createComment({
               owner: context.repo.owner,
               repo: context.repo.repo,
