@@ -2,13 +2,14 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: ['*']
-  pull_request:
-    branches: ['*']
 
-# Add concurrency settings
+  pull_request:
+    branches:
+      - main
+
+# tack on branch name to allow for cross-branch concurrency
 concurrency: 
-  group: ${{ github.workflow }}
+  group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: false
 
 permissions:
@@ -19,103 +20,60 @@ permissions:
   pull-requests: write
 
 jobs:
-  build-and-deploy:
+  setup:
     runs-on: ubuntu-latest
-    environment:
-      name: 'preview-${{ github.ref_name }}'
-      url: 'https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/${{ steps.preview.outputs.deploy_path }}'
+    outputs:
+      deploy_path: ${{ steps.set-vars.outputs.deploy_path }}
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-
-      - name: Install Dependencies
-        run: npm ci
-
-      - name: Build
-        run: npm run build
-
-      - name: Prepare preview directory
-        id: preview
+      - id: set-vars
+        shell: bash
         run: |
           # Replace slashes with dashes in branch name
           if [ "${{ github.event_name }}" == "pull_request" ]; then
             BRANCH_NAME="${{ github.head_ref }}"
           else
-            BRANCH_NAME="${GITHUB_REF_NAME}"
+            BRANCH_NAME="${{ github.ref_name }}"
           fi
           
           # Replace slashes with dashes for safety
           DEPLOY_PATH="${BRANCH_NAME//\//-}"
-          echo "deploy_path=${DEPLOY_PATH}" >> $GITHUB_OUTPUT
-          
-          # Create preview directory structure
-          mkdir -p "preview-out/${DEPLOY_PATH}"
-          cp -r dist/* "preview-out/${DEPLOY_PATH}/"
-          
-          # Copy 404.html to root for routing
-          cp dist/404.html preview-out/
+          echo "deploy_path=$DEPLOY_PATH" >> $GITHUB_OUTPUT
 
-      - name: Deploy to gh-pages
-        id: deploy
-        uses: peaceiris/actions-gh-pages@v3
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    needs: setup
+    environment:
+      name: "preview-${{ needs.setup.outputs.deploy_path }}"
+      url: "${{ steps.build-publish.outputs.page_url }}${{ needs.setup.outputs.deploy_path }}"
+    steps:
+      - id: build-publish
+        uses: bitovi/github-actions-react-to-github-pages@v1.2.4
+        env:
+          BUILD_PATH: preview-out # change to your build folder
+          DEPLOY_PATH: ${{ needs.setup.outputs.deploy_path }}
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: preview-out
-          keep_files: true
-          publish_branch: gh-pages
-
-      - name: Wait for Pages
-        id: wait-for-pages
-        if: github.event_name == 'pull_request' && steps.deploy.conclusion == 'success'
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const MAX_ATTEMPTS = 30;
-            for (let i = 0; i < MAX_ATTEMPTS; i++) {
-              const deployments = await github.rest.repos.listDeployments({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                environment: 'github-pages'
-              });
-              
-              if (deployments.data.length > 0) {
-                const status = await github.rest.repos.listDeploymentStatuses({
-                  owner: context.repo.owner,
-                  repo: context.repo.repo,
-                  deployment_id: deployments.data[0].id
-                });
-                
-                if (status.data[0]?.state === 'success') {
-                  console.log('Deployment complete!');
-                  break;
-                }
-              }
-              
-              if (i === MAX_ATTEMPTS - 1) {
-                throw new Error('Deployment timeout');
-              }
-              
-              console.log(`Waiting for deployment... (Attempt ${i + 1}/${MAX_ATTEMPTS})`);
-              await new Promise(r => setTimeout(r, 10000));
-            }
+          path: ${{ env.BUILD_PATH }} 
+          build_command: |
+            npm run build
+            
+            # Create preview directory structure
+            mkdir -p "$BUILD_PATH/${DEPLOY_PATH}"
+            cp -r dist/* "$BUILD_PATH/${DEPLOY_PATH}/"
+            
+            # Copy 404.html to root for routing
+            cp dist/404.html $BUILD_PATH/
 
       - name: Comment on PR
-        if: |
-          github.event_name == 'pull_request' && 
-          steps.deploy.conclusion == 'success' && 
-          steps.wait-for-pages.conclusion == 'success'
+        if: github.event_name == 'pull_request'
         uses: actions/github-script@v7
         with:
           script: |
-            github.rest.issues.createComment({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: context.issue.number,
-              body: `🎉 **Preview Deployed!**
-              👉 <a href="https://${context.repo.owner}.github.io/${context.repo.repo}/${{ steps.preview.outputs.deploy_path }}" target="_blank">View Preview</a>`
-            })
+            if(context.issue && context.issue.number){
+              github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body: `🎉 **Preview Deployed!**
+                👉 <a href="${{ steps.build-publish.outputs.page_url }}${{ needs.setup.outputs.deploy_path }}" target="_blank">View Preview</a>`
+              });
+            }
