@@ -1,5 +1,5 @@
 // Generated SCSS Variables
-$base-colour-blue-200: #8bc4ff
+$base-colour-grey-400: #282828
 $global-font-uidefaultfont: Inter
 $base-font-size-xl: 20px
 $base-font-weight-semibold: 500
@@ -7,12 +7,10 @@ $base-font-linespacing-lg: 24px
 $base-colour-static-white: #ffffff
 $base-colour-grey-100: #d9d9d9
 $base-size-lg: 12px
-$base-colour-grey-300: #747474
-$base-font-weight-regular: 400
-$base-colour-pink-300: #cd0087
 $global-colour-textonlight: #282828
-$base-colour-pink-100: #ffc6e0
-$brand-colour-accent-300: #0177cc
+$base-font-weight-regular: 400
+$base-colour-grey-300: #747474
+$base-colour-blue-300: #0177cc
 
 // Generated SCSS Mixins
 @mixin input_resting
@@ -22,7 +20,7 @@ $brand-colour-accent-300: #0177cc
   gap: 2px
 
 @mixin input_resting_label
-  color: $base-colour-blue-200
+  color: $base-colour-grey-400
   font-family: $global-font-uidefaultfont
   font-size: $base-font-size-xl
   font-weight: $base-font-weight-semibold
@@ -37,10 +35,10 @@ $brand-colour-accent-300: #0177cc
   background-color: $base-colour-static-white
   border-color: $base-colour-grey-100
   border-width: 1px
-  border-radius: 12px
+  border-radius: 4px
 
 @mixin input_resting_input-box_input-text
-  color: $base-colour-grey-300
+  color: $global-colour-textonlight
   font-family: $global-font-uidefaultfont
   font-size: 16px
   font-weight: $base-font-weight-regular
@@ -53,7 +51,7 @@ $brand-colour-accent-300: #0177cc
   gap: 2px
 
 @mixin input_hover_label
-  color: $base-colour-pink-300
+  color: $base-colour-grey-400
   font-family: $global-font-uidefaultfont
   font-size: $base-font-size-xl
   font-weight: $base-font-weight-semibold
@@ -68,7 +66,7 @@ $brand-colour-accent-300: #0177cc
   background-color: $base-colour-static-white
   border-color: $base-colour-grey-300
   border-width: 1px
-  border-radius: 12px
+  border-radius: 4px
 
 @mixin input_hover_input-box_input-text
   color: $global-colour-textonlight
@@ -84,7 +82,7 @@ $brand-colour-accent-300: #0177cc
   gap: 2px
 
 @mixin input_active_label
-  color: $base-colour-pink-100
+  color: $base-colour-blue-300
   font-family: $global-font-uidefaultfont
   font-size: $base-font-size-xl
   font-weight: $base-font-weight-semibold
@@ -97,8 +95,9 @@ $brand-colour-accent-300: #0177cc
   gap: $base-size-lg
   padding: 11px 12px
   background-color: $base-colour-static-white
-  border-color: $brand-colour-accent-300
+  border-color: $base-colour-blue-300
   border-width: 2px
+  border-radius: 4px
 
 @mixin input_active_input-box_input-text
   color: $global-colour-textonlight
@@ -106,4 +105,3 @@ $brand-colour-accent-300: #0177cc
   font-size: 16px
   font-weight: $base-font-weight-regular
   line-height: 20px
-
