@@ -4,20 +4,21 @@ $global-font-uidefaultfont: Inter
 $base-font-size-xl: 20px
 $base-font-weight-semibold: 500
 $base-font-linespacing-lg: 24px
-$base-colour-static-white: #ffffff
+$brand-colour-primary-100: #ffc6e0
 $base-colour-grey-100: #d9d9d9
 $base-size-lg: 12px
 $global-colour-textonlight: #282828
 $base-font-weight-regular: 400
+$base-colour-static-white: #ffffff
 $base-colour-grey-300: #747474
 $base-colour-blue-300: #0177cc
 
 // Generated SCSS Mixins
 @mixin input_resting
   display: flex
-  flex-direction: column
+  flex-direction: row
   align-items: flex-start
-  gap: 2px
+  gap: 20px
 
 @mixin input_resting_label
   color: $base-colour-grey-400
@@ -27,15 +28,15 @@ $base-colour-blue-300: #0177cc
   line-height: $base-font-linespacing-lg
 
 @mixin input_resting_input-box
-  display: flex
+  display: inline-flex
   flex-direction: row
   align-items: flex-start
   gap: $base-size-lg
   padding: 11px 12px
-  background-color: $base-colour-static-white
+  background-color: $brand-colour-primary-100
   border-color: $base-colour-grey-100
   border-width: 1px
-  border-radius: 4px
+  border-radius: 50px
 
 @mixin input_resting_input-box_input-text
   color: $global-colour-textonlight
@@ -66,7 +67,7 @@ $base-colour-blue-300: #0177cc
   background-color: $base-colour-static-white
   border-color: $base-colour-grey-300
   border-width: 1px
-  border-radius: 4px
+  border-radius: 50px
 
 @mixin input_hover_input-box_input-text
   color: $global-colour-textonlight
@@ -96,8 +97,8 @@ $base-colour-blue-300: #0177cc
   padding: 11px 12px
   background-color: $base-colour-static-white
   border-color: $base-colour-blue-300
-  border-width: 2px
-  border-radius: 4px
+  border-width: 1px
+  border-radius: 50px
 
 @mixin input_active_input-box_input-text
   color: $global-colour-textonlight
@@ -105,3 +106,4 @@ $base-colour-blue-300: #0177cc
   font-size: 16px
   font-weight: $base-font-weight-regular
   line-height: 20px
+
