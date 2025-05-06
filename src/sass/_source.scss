@@ -1,72 +1,72 @@
 /* Generated Tailwind-SCSS */
 @mixin input_resting {
-  @apply gap-x-0.5 gap-y-0.5 pt-0 pr-0 pb-0 pl-0; 
+  @apply flex flex-col items-start gap-x-0.5 gap-y-0.5 pt-0 pr-0 pb-0 pl-0; 
 }
 
 @mixin input_resting_Label {
-  @apply text-[#282828] font-[inter] text-xl font-medium; 
+  @apply text-[#282828] font-[inter] text-xl font-medium flex flex-col; 
 }
 
 @mixin input_resting_Input-box {
-  @apply bg-white gap-x-3 gap-y-3 border-DEFAULT border-solid border-[#d9d9d9] rounded-tl-lg rounded-tr-lg rounded-br-lg rounded-bl-lg pt-[11px] pr-3 pb-[11px] pl-3; 
+  @apply bg-white flex flex-row items-center gap-x-3 gap-y-3 border-[10px] border-solid border-[#d9d9d9] rounded-tl-lg rounded-tr-lg rounded-br-lg rounded-bl-lg pt-[11px] pr-3 pb-[11px] pl-3; 
 }
 
 @mixin input_resting_Input-box_Input-text {
-  @apply text-[#282828] font-[inter] text-base font-normal; 
+  @apply text-[#282828] font-[inter] text-base font-normal flex flex-col; 
 }
 
 @mixin input_hover {
-  @apply gap-x-0.5 gap-y-0.5 pt-0 pr-0 pb-0 pl-0; 
+  @apply flex flex-col items-start gap-x-0.5 gap-y-0.5 pt-0 pr-0 pb-0 pl-0; 
 }
 
 @mixin input_hover_Label {
-  @apply text-[#282828] font-[inter] text-xl font-medium; 
+  @apply text-[#282828] font-[inter] text-xl font-medium flex flex-col; 
 }
 
 @mixin input_hover_Input-box {
-  @apply bg-white gap-x-3 gap-y-3 border-DEFAULT border-solid border-[#747474] rounded-tl-lg rounded-tr-lg rounded-br-lg rounded-bl-lg pt-[11px] pr-3 pb-[11px] pl-3; 
+  @apply bg-white flex flex-row items-center gap-x-3 gap-y-3 border-[10px] border-solid border-[#747474] rounded-tl-lg rounded-tr-lg rounded-br-lg rounded-bl-lg pt-[11px] pr-3 pb-[11px] pl-3; 
 }
 
 @mixin input_hover_Input-box_Input-text {
-  @apply text-[#282828] font-[inter] text-base font-normal; 
+  @apply text-[#282828] font-[inter] text-base font-normal flex flex-col; 
 }
 
 @mixin input_active {
-  @apply gap-x-0.5 gap-y-0.5 pt-0 pr-0 pb-0 pl-0; 
+  @apply flex flex-col items-start gap-x-0.5 gap-y-0.5 pt-0 pr-0 pb-0 pl-0; 
 }
 
 @mixin input_active_Label {
-  @apply text-[#0177cc] font-[inter] text-xl font-medium; 
+  @apply text-[#cd0087] font-[inter] text-xl font-medium flex flex-col; 
 }
 
 @mixin input_active_Input-box {
-  @apply bg-white gap-x-3 gap-y-3 border-DEFAULT border-solid border-[#0177cc] rounded-tl-lg rounded-tr-lg rounded-br-lg rounded-bl-lg pt-[11px] pr-3 pb-[11px] pl-3; 
+  @apply bg-white flex flex-row items-center gap-x-3 gap-y-3 border-[10px] border-solid border-[#cd0087] rounded-tl-lg rounded-tr-lg rounded-br-lg rounded-bl-lg pt-[11px] pr-3 pb-[11px] pl-3; 
 }
 
 @mixin input_active_Input-box_Input-text {
-  @apply text-[#282828] font-[inter] text-base font-normal; 
+  @apply text-[#282828] font-[inter] text-base font-normal flex flex-col; 
 }
 
 @mixin button_resting {
-  @apply bg-[#cd0087] gap-x-3 gap-y-3 rounded-tl-DEFAULT rounded-tr-DEFAULT rounded-br-DEFAULT rounded-bl-DEFAULT pt-[9px] pr-6 pb-[9px] pl-6; 
+  @apply bg-[#cd0087] flex flex-row items-center gap-x-3 gap-y-3 rounded-tl rounded-tr rounded-br rounded-bl pt-[11px] pr-6 pb-[11px] pl-6; 
 }
 
 @mixin button_resting_Button-text {
   @apply text-white font-[inter] text-lg font-medium; 
 }
 
-@mixin button_resting_Icon-1 {
-  @apply pt-0 pr-0 pb-0 pl-0; 
-}
-
 @mixin button_hover {
-  @apply bg-[#4d0030] gap-x-3 gap-y-3 rounded-tl-DEFAULT rounded-tr-DEFAULT rounded-br-DEFAULT rounded-bl-DEFAULT pt-[9px] pr-6 pb-[9px] pl-6; 
+  @apply bg-[#cd0087] flex flex-row items-center gap-x-3 gap-y-3 rounded-tl rounded-tr rounded-br rounded-bl pt-[11px] pr-6 pb-[11px] pl-6; 
 }
 
 @mixin button_hover_Button-text {
   @apply text-white font-[inter] text-lg font-medium; 
 }
 
-@mixin button_hover_Icon-1 {
-  @apply pt-0 pr-0 pb-0 pl-0; 
+@mixin button_pressed {
+  @apply bg-[#4d0030] flex flex-row items-center gap-x-3 gap-y-3 rounded-tl rounded-tr rounded-br rounded-bl pt-[11px] pr-6 pb-[11px] pl-6; 
+}
+
+@mixin button_pressed_Button-text {
+  @apply text-white font-[inter] text-lg font-medium; 
 }
