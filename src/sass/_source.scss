@@ -1,144 +1,315 @@
-// Generated SCSS Variables
-$base-size-xs: 0.125rem;
-$base-colour-grey-400: #282828;
-$base-font-size-xl: 1.25rem;
-$global-font-uidefaultfont: inter;
-$base-font-linespacing-lg: 1.5rem;
-$base-font-weight-semibold: 31.25rem;
+// Primitive SCSS Variables
+$base-colour-static-black: #000000;
 $base-colour-static-white: #ffffff;
-$base-size-lg: 0.75rem;
-$base-radius-sm: 0.25rem;
-$global-size-border-width: 0.062rem;
-$base-colour-grey-100: #d9d9d9;
-$global-colour-textonlight: #282828;
-$base-font-weight-regular: 25rem;
-$base-colour-grey-300: #747474;
+$base-colour-static-transparent: rgba(255, 255, 255, 0);
+$base-colour-grey-400: #282828;
+$base-colour-blue-400: #00294c;
+$base-colour-pink-400: #4d0030;
+$base-colour-pink-300: #cd0087;
+$base-colour-pink-200: #ff9acb;
+$base-colour-pink-100: #ffc6e0;
 $base-colour-blue-300: #0177cc;
+$base-colour-blue-200: #8bc4ff;
+$base-colour-blue-100: #bdddff;
+$base-colour-grey-300: #747474;
+$base-colour-grey-200: #bfbfbf;
+$base-colour-grey-100: #d9d9d9;
+$base-colour-static-black-50: rgba(0, 0, 0, 0.5);
+$base-colour-static-black-30: rgba(0, 0, 0, 0.30000001192092896);
+$base-colour-static-black-10: rgba(0, 0, 0, 0.10000000149011612);
+$base-font-linespacing-md: 1.25rem;
+$base-font-size-md: 1rem;
+$base-font-weight-thin: 100;
+$base-font-linespacing-lg: 1.5rem;
+$base-font-size-lg: 1.125rem;
+$base-font-weight-regular: 400;
+$base-font-linespacing-xl: 1.75rem;
+$base-font-size-xl: 1.25rem;
+$base-font-weight-semibold: 500;
+$base-font-linespacing-2xl: 2rem;
+$base-font-size-2xl: 1.5rem;
+$base-font-size-3xl: 2rem;
+$base-font-weight-bold: 800;
+$base-font-family-inter: inter;
+$base-font-family-noto-serif: noto serif;
+$base-radius-sm: 0.25rem;
+$base-radius-md: 0.5rem;
+$base-radius-lg: 0.75rem;
+$base-size-none: 0rem;
+$base-size-2xs: 0.0625rem;
+$base-size-xs: 0.125rem;
+$base-size-sm: 0.25rem;
+$base-size-md: 0.5rem;
+$base-size-lg: 0.75rem;
+$base-size-xl: 1rem;
+$base-size-2xl: 1.5rem;
+$global-animation-duration: 12.5rem;
+$global-animation-transition: easeinout;
+
+// Semantic SCSS Variables
+$global-font-uidefaultfont: $base-font-family-inter;
+$global-size-border-width: $base-size-2xs;
+$global-colour-textonlight: $base-colour-grey-400;
+$global-colour-action-background: $base-colour-pink-300;
+$component-button-border-width-resting: $base-size-2xs;
+$global-colour-action-textonbg: $base-colour-static-white;
+$component-button-icon-width-resting: $base-size-2xl;
+$component-button-icon-height-resting: $base-size-2xl;
+$component-button-icon-colour-resting: $base-colour-static-white;
 
 // Generated SCSS Mixins
-@mixin input_resting {
- display: flex;
- flex-direction: column;
- align-items: flex-start;
- gap: $base-size-xs;
- padding: 0rem;
- width: 15.937rem;
+@mixin input-resting {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: $base-size-xs;
+  padding: 0rem;
+  width: 15.9375rem;
 }
-@mixin input_resting_label {
- display: flex;
- flex-direction: column;
- color: $base-colour-grey-400;
- font-family: $global-font-uidefaultfont;
- font-size: $base-font-size-xl;
- font-weight: 500;
- font-style: normal;
- line-height: $base-font-linespacing-lg;
- width: 15.937rem;
+@mixin input-label-resting {
+  display: flex;
+  flex-direction: column;
+  color: $base-colour-grey-400;
+  font-family: $global-font-uidefaultfont;
+  font-size: $base-font-size-xl;
+  font-weight: 500;
+  font-style: normal;
+  line-height: $base-font-linespacing-lg;
+  text-align: right;
+  width: 15.9375rem;
 }
-@mixin input_resting_input-box {
- display: flex;
- flex-direction: row;
- align-items: center;
- gap: $base-size-lg;
- padding: 0.687rem $base-size-lg;
- background: $base-colour-static-white;
- width: 15.937rem;
- border: $global-size-border-width solid $base-colour-grey-100;
- box-shadow: inset 0 $global-size-border-width 0 0 $base-colour-grey-100, inset (-$global-size-border-width) 0 0 0 $base-colour-grey-100, inset 0 (-$global-size-border-width) 0 0 $base-colour-grey-100, inset $global-size-border-width 0 0 0 $base-colour-grey-100;
- border-radius: $base-radius-sm;
+@mixin input-input-box-resting {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: $base-size-lg;
+  background: $base-colour-static-white;
+  width: 15.9375rem;
+  border: $global-size-border-width solid $base-colour-grey-100;
+  box-shadow: inset 0 $global-size-border-width 0 0 $base-colour-grey-100, inset (-$global-size-border-width) 0 0 0 $base-colour-grey-100, inset 0 (-$global-size-border-width) 0 0 $base-colour-grey-100, inset $global-size-border-width 0 0 0 $base-colour-grey-100;
+  border-radius: $base-radius-md;
+  padding: calc(0.6875rem - #{$global-size-border-width}) calc(#{$base-size-lg} - #{$global-size-border-width});
 }
-@mixin input_resting_input-box_input-text {
- display: flex;
- flex-direction: column;
- color: $global-colour-textonlight;
- font-family: $global-font-uidefaultfont;
- font-size: 1rem;
- font-weight: 400;
- font-style: normal;
- line-height: 20px;
- width: 14.437rem;
+@mixin input-input-box-input-text-resting {
+  display: flex;
+  flex-direction: column;
+  color: $global-colour-textonlight;
+  font-family: $global-font-uidefaultfont;
+  font-size: 1rem;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 20px;
+  width: 14.4375rem;
 }
-@mixin input_hover {
- display: flex;
- flex-direction: column;
- align-items: flex-start;
- gap: $base-size-xs;
- padding: 0rem;
- width: 15.937rem;
+@mixin input-hover {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: $base-size-xs;
+  padding: 0rem;
+  width: 15.9375rem;
 }
-@mixin input_hover_label {
- display: flex;
- flex-direction: column;
- color: $base-colour-grey-400;
- font-family: $global-font-uidefaultfont;
- font-size: $base-font-size-xl;
- font-weight: 500;
- font-style: normal;
- line-height: $base-font-linespacing-lg;
- width: 15.937rem;
+@mixin input-label-hover {
+  display: flex;
+  flex-direction: column;
+  color: $base-colour-grey-400;
+  font-family: $global-font-uidefaultfont;
+  font-size: $base-font-size-xl;
+  font-weight: 500;
+  font-style: normal;
+  line-height: $base-font-linespacing-lg;
+  text-align: right;
+  width: 15.9375rem;
 }
-@mixin input_hover_input-box {
- display: flex;
- flex-direction: row;
- align-items: center;
- gap: $base-size-lg;
- padding: 0.687rem $base-size-lg;
- background: $base-colour-static-white;
- width: 15.937rem;
- border: $global-size-border-width solid $base-colour-grey-300;
- box-shadow: inset 0 $global-size-border-width 0 0 $base-colour-grey-300, inset (-$global-size-border-width) 0 0 0 $base-colour-grey-300, inset 0 (-$global-size-border-width) 0 0 $base-colour-grey-300, inset $global-size-border-width 0 0 0 $base-colour-grey-300;
- border-radius: $base-radius-sm;
+@mixin input-input-box-hover {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: $base-size-lg;
+  background: $base-colour-static-white;
+  width: 15.9375rem;
+  border: $global-size-border-width solid $base-colour-grey-300;
+  box-shadow: inset 0 $global-size-border-width 0 0 $base-colour-grey-300, inset (-$global-size-border-width) 0 0 0 $base-colour-grey-300, inset 0 (-$global-size-border-width) 0 0 $base-colour-grey-300, inset $global-size-border-width 0 0 0 $base-colour-grey-300;
+  border-radius: $base-radius-md;
+  padding: calc(0.6875rem - #{$global-size-border-width}) calc(#{$base-size-lg} - #{$global-size-border-width});
 }
-@mixin input_hover_input-box_input-text {
- display: flex;
- flex-direction: column;
- color: $global-colour-textonlight;
- font-family: $global-font-uidefaultfont;
- font-size: 1rem;
- font-weight: 400;
- font-style: normal;
- line-height: 20px;
- width: 14.437rem;
+@mixin input-input-box-input-text-hover {
+  display: flex;
+  flex-direction: column;
+  color: $global-colour-textonlight;
+  font-family: $global-font-uidefaultfont;
+  font-size: 1rem;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 20px;
+  width: 14.4375rem;
 }
-@mixin input_active {
- display: flex;
- flex-direction: column;
- align-items: flex-start;
- gap: $base-size-xs;
- padding: 0rem;
- width: 15.937rem;
+@mixin input-active {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: $base-size-xs;
+  padding: 0rem;
+  width: 15.9375rem;
 }
-@mixin input_active_label {
- display: flex;
- flex-direction: column;
- color: $base-colour-blue-300;
- font-family: $global-font-uidefaultfont;
- font-size: $base-font-size-xl;
- font-weight: 500;
- font-style: normal;
- line-height: $base-font-linespacing-lg;
- width: 15.937rem;
+@mixin input-label-active {
+  display: flex;
+  flex-direction: column;
+  color: $base-colour-blue-300;
+  font-family: $global-font-uidefaultfont;
+  font-size: $base-font-size-xl;
+  font-weight: 500;
+  font-style: normal;
+  line-height: $base-font-linespacing-lg;
+  text-align: right;
+  width: 15.9375rem;
 }
-@mixin input_active_input-box {
- display: flex;
- flex-direction: row;
- align-items: center;
- gap: $base-size-lg;
- padding: 0.687rem $base-size-lg;
- background: $base-colour-static-white;
- width: 15.937rem;
- border: 0.125rem solid $base-colour-blue-300;
- box-shadow: inset 0 0.125rem 0 0 $base-colour-blue-300, inset -0.125rem 0 0 0 $base-colour-blue-300, inset 0 -0.125rem 0 0 $base-colour-blue-300, inset 0.125rem 0 0 0 $base-colour-blue-300;
- border-radius: $base-radius-sm;
+@mixin input-input-box-active {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: $base-size-lg;
+  background: $base-colour-static-white;
+  width: 15.9375rem;
+  border: 0.0625rem solid $base-colour-blue-300;
+  box-shadow: inset 0 0.0625rem 0 0 $base-colour-blue-300, inset -0.0625rem 0 0 0 $base-colour-blue-300, inset 0 -0.0625rem 0 0 $base-colour-blue-300, inset 0.0625rem 0 0 0 $base-colour-blue-300;
+  border-radius: $base-radius-md;
+  padding: 0.625rem calc(#{$base-size-lg} - 0.0625rem);
 }
-@mixin input_active_input-box_input-text {
- display: flex;
- flex-direction: column;
- color: $global-colour-textonlight;
- font-family: $global-font-uidefaultfont;
- font-size: 1rem;
- font-weight: 400;
- font-style: normal;
- line-height: 20px;
- width: 14.437rem;
+@mixin input-input-box-input-text-active {
+  display: flex;
+  flex-direction: column;
+  color: $global-colour-textonlight;
+  font-family: $global-font-uidefaultfont;
+  font-size: 1rem;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 20px;
+  width: 14.4375rem;
+}
+@mixin button-button-active {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: $base-size-lg;
+  padding: 0.5625rem $base-size-2xl;
+  background: $global-colour-action-background;
+  border-radius: $base-radius-sm;
+}
+@mixin button-button-button-text-active {
+  color: $global-colour-action-textonbg;
+  font-family: $global-font-uidefaultfont;
+  font-size: 1.125rem;
+  font-weight: 500;
+  font-style: normal;
+  line-height: 20px;
+}
+@mixin button-button-icon-active {
+  padding: 0rem;
+}
+@mixin button-button-icon-vector-active {
+  border: 0.125rem solid $component-button-icon-colour-resting;
+}
+@mixin styles-rectangle-1-active {
+  background: $base-colour-grey-400;
+}
+@mixin styles-rectangle-13-active {
+  background: $base-colour-static-black;
+}
+@mixin styles-rectangle-16-active {
+  background: $base-colour-static-black-50;
+}
+@mixin styles-rectangle-17-active {
+  background: $base-colour-static-black-30;
+}
+@mixin styles-rectangle-18-active {
+  background: $base-colour-static-black-10;
+}
+@mixin styles-rectangle-14-active {
+  background: $base-colour-static-white;
+}
+@mixin styles-rectangle-15-active {
+  background: $base-colour-static-transparent;
+  box-shadow: inset 0 0.0625rem 0 0 #000000, inset -0.0625rem 0 0 0 #000000, inset 0 -0.0625rem 0 0 #000000, inset 0.0625rem 0 0 0 #000000;
+}
+@mixin styles-rectangle-5-active {
+  background: $base-colour-blue-400;
+}
+@mixin styles-rectangle-9-active {
+  background: $base-colour-pink-400;
+}
+@mixin styles-rectangle-2-active {
+  background: $base-colour-grey-300;
+}
+@mixin styles-rectangle-6-active {
+  background: $base-colour-blue-300;
+}
+@mixin styles-rectangle-10-active {
+  background: $base-colour-pink-300;
+}
+@mixin styles-rectangle-3-active {
+  background: $base-colour-grey-200;
+}
+@mixin styles-rectangle-7-active {
+  background: $base-colour-blue-200;
+}
+@mixin styles-rectangle-11-active {
+  background: $base-colour-pink-200;
+}
+@mixin styles-rectangle-4-active {
+  background: $base-colour-grey-100;
+}
+@mixin styles-rectangle-8-active {
+  background: $base-colour-blue-100;
+}
+@mixin styles-rectangle-12-active {
+  background: $base-colour-pink-100;
+}
+@mixin styles-text-size-24-active {
+  color: $base-colour-static-black;
+  font-family: Inter;
+  font-size: 1.5rem;
+  font-weight: 600;
+  font-style: normal;
+  line-height: normal;
+}
+@mixin styles-inter-active {
+  color: $base-colour-static-black;
+  font-family: Inter;
+  font-size: 1.5rem;
+  font-weight: 600;
+  font-style: normal;
+  line-height: normal;
+}
+@mixin styles-noto-serif-active {
+  color: $base-colour-static-black;
+  font-family: Noto Serif;
+  font-size: 1.5rem;
+  font-weight: 400;
+  font-style: normal;
+  line-height: normal;
+}
+@mixin styles-text-size-20-active {
+  color: $base-colour-static-black;
+  font-family: Inter;
+  font-size: 1.25rem;
+  font-weight: 600;
+  font-style: normal;
+  line-height: normal;
+}
+@mixin styles-text-size-18-active {
+  color: $base-colour-static-black;
+  font-family: Inter;
+  font-size: 1.125rem;
+  font-weight: 600;
+  font-style: normal;
+  line-height: normal;
+}
+@mixin styles-text-size-16-active {
+  color: $base-colour-static-black;
+  font-family: Inter;
+  font-size: 1rem;
+  font-weight: 600;
+  font-style: normal;
+  line-height: normal;
 }
